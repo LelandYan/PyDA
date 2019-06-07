@@ -11,7 +11,7 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,8 +38,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/index/">主页</a></li>
+                <li><a href="/index/">主页</a></li>
+                {% block app %}{% endblock %}
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 {% if request.session.is_login %}
                     <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>

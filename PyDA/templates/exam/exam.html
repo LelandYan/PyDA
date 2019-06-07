@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}考试{% endblock %}
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">考试题目</h3>
+        </div>
+        <div class="panel-body">
+            <form class='form-register' action="/exam/submit" method="post">
+                {% csrf_token %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">填空</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for f in F %}
+                            <h4>{{ forloop.counter }}:{{ f.question_text }}</h4>
+                            <input type="text" name='answer{{ f.id }}' id="id_answer" autofocus required/>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">选择</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for c in C %}
+                            <h4>{{ forloop.counter }}:{{ c.question_text }}</h4>
+                            <div class="radio">
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ c.id }}" id="optionsRadiosA"
+                                    value="A">A: {{ c.question_a }}</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ c.id }}" id="optionsRadiosB"
+                                    value="B">B: {{ c.question_b }}</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ c.id }}" id="optionsRadiosC"
+                                    value="C">C: {{ c.question_c }}</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ c.id }}" id="optionsRadiosD"
+                                    value="D">D: {{ c.question_d }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">判断</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for j in J %}
+                            <h4>{{ forloop.counter }}:{{ j.question_text }}</h4>
+                            <div class="radio">
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ j.id }}" id="optionsRadiosE"
+                                    value="T">T</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="answer{{ j.id }}" id="optionsRadiosF"
+                                    value="F">F</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button id="submit" type="submit" class="btn btn-primary pull-right">提交</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
